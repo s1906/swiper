@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'user',
+    'social',
 ]
 
 MIDDLEWARE = [
@@ -43,6 +44,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+from django.contrib.sessions.middleware import SessionMiddleware
 
 ROOT_URLCONF = 'swiper.urls'
 
@@ -118,3 +121,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+MEDIAS = 'medias'
+
+
+CACHES = {
+    "default": {
+"BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/5",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PICKLE_VERSION": -1,
+        }
+    }
+}
+
+
+# 修改session的存放位置
+SESSION_ENFING = "django.contrib.sessions.backends.cache"
